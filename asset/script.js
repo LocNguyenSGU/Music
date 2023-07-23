@@ -187,6 +187,8 @@ const app = {
             audio.play();
             _this.render();
             _this.scrollToActiveSong();
+            player.classList.add("playing");
+            cdThumbAnimate.play();
         };
         // Xử lí khi prev
         prevBtn.onclick = function () {
@@ -198,6 +200,8 @@ const app = {
             audio.play();
             _this.render();
             _this.scrollToActiveSong();
+            player.classList.add("playing");
+            cdThumbAnimate.play();
         };
         // Xử lí bật/ tắt random
         randBtn.onclick = function (e) {
@@ -229,6 +233,8 @@ const app = {
                     _this.loadCurrentSong();
                     _this.render();
                     audio.play();
+                    cdThumbAnimate.play();
+                    player.classList.add("playing");
                 }
 
                 // Xử lý khi click vào song option
