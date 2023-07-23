@@ -70,11 +70,43 @@ const app = {
             path: "./asset/audio/song-7.mp3",
             img: "./asset/img/img-song-7.jpg",
         },
+        {
+            name: "Phía sau một cô gái",
+            singer: "Soobin Hoang Son",
+            path: "./asset/audio/song-8.mp3",
+            img: "./asset/img/img-song-8.jpg",
+        },
+        {
+            name: "Đi để trở về",
+            singer: "Soobin Hoang Son",
+            path: "./asset/audio/song-9.mp3",
+            img: "./asset/img/img-song-9.jpg",
+        },
+        {
+            name: "Ghé qua",
+            singer: "Dick x PC x Tofu",
+            path: "./asset/audio/song-10.mp3",
+            img: "./asset/img/img-song-10.jpg",
+        },
+        {
+            name: "Tâm sự tuổi 30",
+            singer: "Trinh Thanh Binh",
+            path: "./asset/audio/song-11.mp3",
+            img: "./asset/img/img-song-11.jpg",
+        },
+        {
+            name: "Ngày mai em đi",
+            singer: "TOULIVER X LÊ HIẾU X SOOBIN HOÀNG SƠN",
+            path: "./asset/audio/song-12.mp3",
+            img: "./asset/img/img-song-12.jpg",
+        },
     ],
     render: function () {
         const htmls = this.songs.map((song, index) => {
             return `
-               <div class="song ${index === this.currentIndex ? "active" : ""}">
+               <div class="song ${
+                   index === this.currentIndex ? "active" : ""
+               }" data-index="${index}">
                <div class="thumb" style="
                               background-image: url('${song.img}');
                            "></div>
@@ -114,10 +146,7 @@ const app = {
             const scrollTop =
                 window.scrollY || document.documentElement.scrollTop;
             const newCdWidth = cdWidth - scrollTop;
-
-            newCdWidth > 0
-                ? (cd.style.width = newCdWidth + "px")
-                : (cd.style.width = 0);
+            cd.style.width = newCdWidth > 0 ? newCdWidth + "px" : 0;
             cd.style.opacity = newCdWidth / cdWidth;
         };
         // Xử lí khi click play
@@ -188,8 +217,27 @@ const app = {
                 nextBtn.click();
             }
         };
+        // Lắng nghe khi nhấp vào playlist
+        playList.onclick = function (e) {
+            const songNode = e.target.closest(".song:not(.active)");
+
+            if (songNode || e.target.closest(".option")) {
+                // Xử lý khi click vào song
+                // Handle when clicking on the song
+                if (songNode) {
+                    _this.currentIndex = Number(songNode.dataset.index);
+                    _this.loadCurrentSong();
+                    _this.render();
+                    audio.play();
+                }
+
+                // Xử lý khi click vào song option
+                // Handle when clicking on the song option
+                if (e.target.closest(".option")) {
+                }
+            }
+        };
     },
-    
     scrollToActiveSong: function () {
         setTimeout(() => {
             $(".song.active").scrol +
